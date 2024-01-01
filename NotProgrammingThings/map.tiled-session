@@ -1,0 +1,55 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "C:/noD/doodleSiege/assets/background.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "Все файлы (*)",
+    "fileStates": {
+        "#tmw_desert_spacing": {
+            "scaleInDock": 1
+        },
+        "C:/noD/doodleSiege/assets/background.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1231.818181818182,
+                "y": 1177.2727272727275
+            }
+        },
+        "C:/noD/doodleSiege/assets/background.tmx#tmw_desert_spacing": {
+            "scaleInDock": 1
+        },
+        "C:/noD/doodleSiege/assets/map.tmx": {
+            "scale": 0.5213125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 800.8632058506175,
+                "y": 800.8632058506175
+            }
+        },
+        "C:/noD/doodleSiege/assets/map.tmx#tmw_desert_spacing": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/noD/doodleSiege/assets",
+    "last.imagePath": "C:/noD/doodleSiege/NotProgrammingThings",
+    "map.height": 75,
+    "map.lastUsedExportFilter": "Файлы Tiled карт (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 75,
+    "openFiles": [
+        "C:/noD/doodleSiege/assets/map.tmx",
+        "C:/noD/doodleSiege/assets/background.tmx"
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+        "C:/noD/doodleSiege/assets/map.tmx",
+        "C:/noD/doodleSiege/assets/background.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.margin": 1,
+    "tileset.spacing": 1
+}
