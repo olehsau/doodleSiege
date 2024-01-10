@@ -1,30 +1,36 @@
 package com.mygdx.doodlesiege;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends Entity{
-    public Player(String id, int maxHp, int hp, int damage, int movementSpeed, Appearance appearance, Weapon weapon) {
-        super(id, maxHp, hp, damage, movementSpeed, appearance, weapon);
-    }
-    public Player(String id, int maxHp, int hp, int damage, int movementSpeed, String appearancePath, Weapon weapon) {
-        super(id, maxHp, hp, damage, movementSpeed, appearancePath, weapon);
-    }
 
-    @Override
-    public void spawn(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-    public void spawn(){
-        this.x = Gdx.graphics.getWidth()/2;
-        this.y = Gdx.graphics.getHeight()/2;
+
+    public Player(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
+        super(id, x, y, sizeX, sizeY, maxHp, hp, damage, hitRange, movementSpeed, appearance, weapon);
     }
 
     @Override
     public void idle() {
 
+    }
+
+    @Override
+    public void step(int dx, int dy) {
+
+    }
+    public void handleMovementInput(){
+        if(Gdx.input.isKeyPressed(Controls.MOVE_UP) && Gdx.input.isKeyPressed(Controls.MOVE_LEFT))
+            step(Direction.UL);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_UP) && Gdx.input.isKeyPressed(Controls.MOVE_RIGHT))
+            step(Direction.UR);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN) && Gdx.input.isKeyPressed(Controls.MOVE_LEFT))
+            step(Direction.DL);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN) && Gdx.input.isKeyPressed(Controls.MOVE_RIGHT))
+            step(Direction.DR);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_UP)) step(Direction.UP);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN)) step(Direction.DOWN);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_LEFT)) step(Direction.LEFT);
+        else if(Gdx.input.isKeyPressed(Controls.MOVE_RIGHT)) step(Direction.RIGHT);
     }
 
     @Override
@@ -53,24 +59,8 @@ public class Player extends Entity{
     }
 
     @Override
-    public void move(int dx, int dy) {
-
-    }
-
-    @Override
-    public void goTo(int x, int y) {
-
-    }
-    /**
-     * Updates and draws the updated player
-     * @param batch
-     */
-    @Override
-    public void update(SpriteBatch batch){
-        if(Gdx.input.isKeyPressed(Controls.MOVE_UP)) this.y += this.movementSpeed;
-        if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN)) this.y -= this.movementSpeed;
-        if(Gdx.input.isKeyPressed(Controls.MOVE_LEFT)) this.x -= this.movementSpeed;
-        if(Gdx.input.isKeyPressed(Controls.MOVE_RIGHT)) this.x += this.movementSpeed;
-        batch.draw(this.appearance, this.x, this.y);
+    public void mainCycle(){
+        handleMovementInput();
+        Global.batch.draw(this.appearance, this.x, this.y);
     }
 }
