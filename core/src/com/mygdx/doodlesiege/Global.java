@@ -12,6 +12,11 @@ public class Global {
     public static Player player;
     public static ArrayList<Mob> mobs;
     public static SpriteBatch batch;
+    /**
+     * is for drawing elements which are fixed on the screen (like health bar)
+     */
+    public static SpriteBatch batchFixed;
+    public static CameraManager cameraManager;
     public static float getDeltaTimeMultiplier(){
         return 60*Gdx.graphics.getDeltaTime();
     }

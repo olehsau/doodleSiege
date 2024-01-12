@@ -1,6 +1,7 @@
 package com.mygdx.doodlesiege;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Entity {
@@ -12,6 +13,8 @@ public abstract class Entity {
     public int maxHp;
     public int hp;
     public int damage;
+    public float reloadTime;
+    public float reloadLeft;
     public int hitRange;
     public int movementSpeed;
     public Appearance appearance;
@@ -41,12 +44,20 @@ public abstract class Entity {
                 this.y -= Math.round(this.movementSpeed*Global.getDeltaTimeMultiplier()/1.4);
                 this.x += Math.round(this.movementSpeed*Global.getDeltaTimeMultiplier()/1.4); break;
         }
+        //Global.cameraManager.update(this);
     }
     public abstract void step(int dx, int dy);
     public abstract void hit(int x, int y);
     public abstract void attack(Entity target);
     public abstract void pick(Item item);
     public abstract void drop(Item item);
+    public void getHit(int damage){
+        this.hp -= damage;
+        if(this.hp<=0) {
+            this.hp = 0;
+            die();
+        }
+    }
     public abstract void die();
     private boolean collidesWith(Entity entity, boolean alreadyChecked) {
         int appearanceWidth = this.appearance.getWidth();
@@ -81,7 +92,7 @@ public abstract class Entity {
      */
     public abstract void mainCycle();
 
-    public Entity(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
+    public Entity(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, float reloadTime, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -90,6 +101,8 @@ public abstract class Entity {
         this.maxHp = maxHp;
         this.hp = hp;
         this.damage = damage;
+        this.reloadTime = reloadTime;
+        this.reloadLeft = reloadTime;
         this.hitRange = hitRange;
         this.movementSpeed = movementSpeed;
         this.appearance = new Appearance(appearance);

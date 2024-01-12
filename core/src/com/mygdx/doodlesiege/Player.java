@@ -1,12 +1,22 @@
 package com.mygdx.doodlesiege;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.doodlesiege.state.PlayerAliveState;
+import com.mygdx.doodlesiege.state.PlayerDeadState;
+import com.mygdx.doodlesiege.state.PlayerState;
 
 public class Player extends Entity{
 
-
-    public Player(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
-        super(id, x, y, sizeX, sizeY, maxHp, hp, damage, hitRange, movementSpeed, appearance, weapon);
+    private PlayerState playerState;
+    public void setState(PlayerState state){
+        this.playerState = state;
+    }
+    public PlayerState getState(){
+        return playerState;
+    }
+    public Player(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, float reloadTime, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
+        super(id, x, y, sizeX, sizeY, maxHp, hp, damage, reloadTime, hitRange, movementSpeed, appearance, weapon);
+        setState(new PlayerAliveState());
     }
 
     @Override
@@ -17,20 +27,6 @@ public class Player extends Entity{
     @Override
     public void step(int dx, int dy) {
 
-    }
-    public void handleMovementInput(){
-        if(Gdx.input.isKeyPressed(Controls.MOVE_UP) && Gdx.input.isKeyPressed(Controls.MOVE_LEFT))
-            step(Direction.UL);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_UP) && Gdx.input.isKeyPressed(Controls.MOVE_RIGHT))
-            step(Direction.UR);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN) && Gdx.input.isKeyPressed(Controls.MOVE_LEFT))
-            step(Direction.DL);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN) && Gdx.input.isKeyPressed(Controls.MOVE_RIGHT))
-            step(Direction.DR);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_UP)) step(Direction.UP);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_DOWN)) step(Direction.DOWN);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_LEFT)) step(Direction.LEFT);
-        else if(Gdx.input.isKeyPressed(Controls.MOVE_RIGHT)) step(Direction.RIGHT);
     }
 
     @Override
@@ -55,12 +51,12 @@ public class Player extends Entity{
 
     @Override
     public void die() {
-
+        playerState.die(this);
     }
 
     @Override
     public void mainCycle(){
-        handleMovementInput();
-        Global.batch.draw(this.appearance, this.x, this.y);
+        playerState.mainCycle(this);
     }
 }
+
