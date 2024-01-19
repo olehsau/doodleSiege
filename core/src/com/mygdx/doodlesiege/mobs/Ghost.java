@@ -1,11 +1,10 @@
 package com.mygdx.doodlesiege.mobs;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.doodlesiege.*;
 
 public class Ghost extends Mob {
-
+    public static final String entityType = "ghost";
     public Ghost(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, float reloadTime, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
         super(id, x, y, sizeX, sizeY, maxHp, hp, damage, reloadTime, hitRange, movementSpeed, appearance, weapon);
     }

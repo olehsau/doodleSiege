@@ -2,6 +2,7 @@ package com.mygdx.doodlesiege;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.doodlesiege.mobs.Mob;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Global {
     public static Player player;
-    public static ArrayList<Mob> mobs;
     public static SpriteBatch batch;
     /**
      * is for drawing elements which are fixed on the screen (like health bar)

@@ -7,4 +7,5 @@ public class Appearance extends Texture {
     public Appearance(String internalPath) {
         super(internalPath);
     }
+
 }

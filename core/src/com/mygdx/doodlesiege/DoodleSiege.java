@@ -1,6 +1,7 @@
 package com.mygdx.doodlesiege;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,9 +18,11 @@ import static com.mygdx.doodlesiege.Global.cameraManager;
 
 public class DoodleSiege extends ApplicationAdapter {
 	MapManager mapManager;
-	Ghost ghost;
 	ShapeRenderer shapeRenderer;
 	Texture blank;
+	MobsManager mobsManager;
+	MyInputProcessor inputProcessor;
+	BulletsManager bulletsManager;
 
 	@Override
 	public void create () {
@@ -27,23 +30,23 @@ public class DoodleSiege extends ApplicationAdapter {
 		batchFixed = new SpriteBatch();
 		mapManager = MapManager.getInstance();
 		cameraManager = CameraManager.getInstance();
-		player = new Player("player",0,0,32,34, 100, 100, 10,1, 40, 5, "player.png", null);
-		ghost = new Ghost("ghost", 50,50,75,64,30,30,10,2,20,2,"ghost.png",null);
+		mobsManager = MobsManager.getInstance(mapManager);
+		player = new Player("player",0,0,32,34, 100, 100, 10,0.5f, 40, 5, "player.png", null);
 		shapeRenderer = new ShapeRenderer();
 		blank = new Texture("blank.png");
+		inputProcessor = new MyInputProcessor();
+		Gdx.input.setInputProcessor(inputProcessor);
+		bulletsManager = new BulletsManager(mobsManager, mapManager);
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(0.5f, 0.5f, 0.5f, 1);
 		batch.begin();
-
 		mapManager.render(cameraManager.getCamera());
-		ghost.mainCycle();
 		player.mainCycle();
 		cameraManager.update(player);
-
-
+		mobsManager.mainCycle();
 		batch.end();
 
 		batchFixed.begin();
@@ -53,11 +56,22 @@ public class DoodleSiege extends ApplicationAdapter {
 		batchFixed.draw(blank,150,100,Math.round(((float)player.hp/(float)player.maxHp)*300),15);
 		batchFixed.setColor(Color.WHITE);
 		batchFixed.end();
+
+		shapeRenderer.setProjectionMatrix(cameraManager.getCamera().combined);
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		shapeRenderer.setColor(Color.BLACK);
+		bulletsManager.mainCycle();
+		for(Bullet bullet : player.firedBullets){
+			shapeRenderer.circle(bullet.x, bullet.y, 5.0f, 32);
+		}
+		shapeRenderer.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
+		mobsManager.dispose();
 		mapManager.dispose();
+		mobsManager.dispose();
 	}
 }

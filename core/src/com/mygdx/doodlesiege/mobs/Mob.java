@@ -1,7 +1,11 @@
-package com.mygdx.doodlesiege;
+package com.mygdx.doodlesiege.mobs;
 
-public class Mob extends Entity{
+import com.mygdx.doodlesiege.Entity;
+import com.mygdx.doodlesiege.Global;
+import com.mygdx.doodlesiege.Item;
+import com.mygdx.doodlesiege.Weapon;
 
+public class Mob extends Entity {
     public Mob(String id, int x, int y, int sizeX, int sizeY, int maxHp, int hp, int damage, float reloadTime, int hitRange, int movementSpeed, String appearance, Weapon weapon) {
         super(id, x, y, sizeX, sizeY, maxHp, hp, damage, reloadTime, hitRange, movementSpeed, appearance, weapon);
     }
@@ -43,8 +47,7 @@ public class Mob extends Entity{
 
     @Override
     public void mainCycle() {
-        stepTowardsPlayer();
-        Global.batch.draw(this.appearance, this.x, this.y);
+
     }
 
     public void stepTowardsPlayer() {

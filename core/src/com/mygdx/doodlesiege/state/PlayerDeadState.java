@@ -29,4 +29,9 @@ public class PlayerDeadState implements PlayerState {
     public void die(Player player) {
         // Player is already dead
     }
+
+    @Override
+    public void fireBullet(Player player, int cursorX, int cursorY) {
+        // can't because is dead
+    }
 }

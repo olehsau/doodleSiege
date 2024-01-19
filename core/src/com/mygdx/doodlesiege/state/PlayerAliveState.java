@@ -1,16 +1,14 @@
 package com.mygdx.doodlesiege.state;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.doodlesiege.Controls;
-import com.mygdx.doodlesiege.Direction;
-import com.mygdx.doodlesiege.Global;
-import com.mygdx.doodlesiege.Player;
+import com.mygdx.doodlesiege.*;
 
 public class PlayerAliveState implements PlayerState {
     @Override
     public void mainCycle(Player player) {
         Global.batch.draw(player.appearance, player.x, player.y);
         handleMovementInput(player);
+
     }
     @Override
     public void handleMovementInput(Player player){
@@ -30,6 +28,11 @@ public class PlayerAliveState implements PlayerState {
     @Override
     public void die(Player player) {
         player.setState(new PlayerDeadState());
+    }
+
+    @Override
+    public void fireBullet(Player player, int cursorX, int cursorY) {
+        player.firedBullets.add(new Bullet("", player.x, player.y,5,5,0,0,10,0,0,0,"blank5x5.png",null, cursorX, cursorY));
     }
 
 }
