@@ -1,8 +1,6 @@
 package com.mygdx.doodlesiege;
 
 public class Bullet extends Entity {
-    public int x;
-    public int y;
     /**
      * speed
      */

@@ -2,9 +2,12 @@ package com.mygdx.doodlesiege;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.doodlesiege.mobs.Ghost;
@@ -23,6 +26,7 @@ public class DoodleSiege extends ApplicationAdapter {
 	MobsManager mobsManager;
 	MyInputProcessor inputProcessor;
 	BulletsManager bulletsManager;
+	BitmapFont font;
 
 	@Override
 	public void create () {
@@ -37,6 +41,11 @@ public class DoodleSiege extends ApplicationAdapter {
 		inputProcessor = new MyInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 		bulletsManager = new BulletsManager(mobsManager, mapManager);
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("GAME OVER.TTF"));
+		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		parameter.size = 36;
+		font = generator.generateFont(parameter);
+		generator.dispose();
 	}
 
 	@Override
@@ -55,6 +64,7 @@ public class DoodleSiege extends ApplicationAdapter {
 		batchFixed.setColor(Color.RED);
 		batchFixed.draw(blank,150,100,Math.round(((float)player.hp/(float)player.maxHp)*300),15);
 		batchFixed.setColor(Color.WHITE);
+		font.draw(batchFixed, "killed mobs: " + player.kills, 20, Gdx.graphics.getHeight() - 20);
 		batchFixed.end();
 
 		shapeRenderer.setProjectionMatrix(cameraManager.getCamera().combined);

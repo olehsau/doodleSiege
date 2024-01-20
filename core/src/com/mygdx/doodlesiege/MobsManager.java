@@ -15,6 +15,7 @@ public class MobsManager {
     private MobsManager(){
         presentMobs = new ArrayList<Mob>();
         timePassed = 0.0f;
+        timeBetweenSpawns = 2.0f;
     }
     public static MobsManager getInstance(MapManager mapManager){
         if(instance == null){
@@ -29,20 +30,24 @@ public class MobsManager {
         switch (mobType){
             case GHOST:
                 spawnCoords = getRandomPointOnMapEdge();
-                presentMobs.add(new Ghost("", (int)spawnCoords.x, (int)spawnCoords.y, 75,80,
-                        30,30,10,1,20,3,"ghost.png",null));
+                presentMobs.add(new Ghost("", (int)spawnCoords.x, (int)spawnCoords.y, 75,64,
+                        50,50,10,1,20,3,"ghost.png",null));
                 break;
         }
     }
 
     private float timePassed;
+    private float timeBetweenSpawns;
     public void mainCycle(){
         for(Mob mob : presentMobs){
             mob.mainCycle();
         }
         timePassed += Gdx.graphics.getDeltaTime();
-        if(timePassed >= 2.0f){
+        if(timePassed >= timeBetweenSpawns){
             timePassed = 0.0f;
+            if(timeBetweenSpawns > 0.2) {
+                timeBetweenSpawns -= 0.018;
+            }
             spawn(MobType.getRandomMobType());
         }
     }

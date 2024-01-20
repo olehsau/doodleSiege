@@ -39,6 +39,7 @@ public class BulletsManager {
             Global.player.firedBullets.remove(bullet);
         }
         for(Mob mob : mobsToRemove){
+        Global.player.kills += 1;
             mobsManager.presentMobs.remove(mob);
         }
     }
