@@ -14,10 +14,8 @@ import com.mygdx.doodlesiege.mobs.Ghost;
 
 import java.util.ArrayList;
 
-import static com.mygdx.doodlesiege.Global.batch;
-import static com.mygdx.doodlesiege.Global.batchFixed;
-import static com.mygdx.doodlesiege.Global.player;
-import static com.mygdx.doodlesiege.Global.cameraManager;
+import static com.mygdx.doodlesiege.AITextGenerator.prompt;
+import static com.mygdx.doodlesiege.Global.*;
 
 public class DoodleSiege extends ApplicationAdapter {
 	MapManager mapManager;
@@ -27,6 +25,9 @@ public class DoodleSiege extends ApplicationAdapter {
 	MyInputProcessor inputProcessor;
 	BulletsManager bulletsManager;
 	BitmapFont font;
+	BitmapFont fontTitle;
+	String AITitle;
+	float timePlayed;
 
 	@Override
 	public void create () {
@@ -45,7 +46,13 @@ public class DoodleSiege extends ApplicationAdapter {
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = 36;
 		font = generator.generateFont(parameter);
+		generator = new FreeTypeFontGenerator(Gdx.files.internal("Roboto-Regular.ttf"));
+		parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		parameter.size = 56;
+		fontTitle = generator.generateFont(parameter);
 		generator.dispose();
+		AITitle = prompt("story of the hero fighting with ghosts");
+		timePlayed = 0;
 	}
 
 	@Override
@@ -65,6 +72,7 @@ public class DoodleSiege extends ApplicationAdapter {
 		batchFixed.draw(blank,150,100,Math.round(((float)player.hp/(float)player.maxHp)*300),15);
 		batchFixed.setColor(Color.WHITE);
 		font.draw(batchFixed, "killed mobs: " + player.kills, 20, Gdx.graphics.getHeight() - 20);
+		if(timePlayed <= 6.0) {fontTitle.draw(batchFixed, AITitle, 50, Gdx.graphics.getHeight() - 200);}
 		batchFixed.end();
 
 		shapeRenderer.setProjectionMatrix(cameraManager.getCamera().combined);
@@ -75,6 +83,7 @@ public class DoodleSiege extends ApplicationAdapter {
 			shapeRenderer.circle(bullet.x, bullet.y, 5.0f, 32);
 		}
 		shapeRenderer.end();
+		timePlayed += Gdx.graphics.getDeltaTime();
 	}
 	
 	@Override

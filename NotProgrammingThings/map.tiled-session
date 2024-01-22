@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "C:/noD/doodleSiege/assets/map.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Все файлы (*)",
@@ -15,8 +15,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 574.2424242424242,
-                "y": -25.75757575757575
+                "x": 1201.5151515151513,
+                "y": 1200
             }
         },
         "C:/noD/doodleSiege/assets/background.tmx#tmw_desert_spacing": {
@@ -26,8 +26,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 787,
-                "y": 819
+                "x": 1373,
+                "y": 658
             }
         },
         "C:/noD/doodleSiege/assets/map.tmx#tmw_desert_spacing": {
@@ -47,8 +47,8 @@
     ],
     "project": "map.tiled-project",
     "recentFiles": [
-        "C:/noD/doodleSiege/assets/map.tmx",
-        "C:/noD/doodleSiege/assets/background.tmx"
+        "C:/noD/doodleSiege/assets/background.tmx",
+        "C:/noD/doodleSiege/assets/map.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.margin": 1,
