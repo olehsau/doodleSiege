@@ -51,6 +51,9 @@ public class AITextGenerator {
         catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        catch (NoClassDefFoundError e){
+            return "";
+        }
     }
 
 }
